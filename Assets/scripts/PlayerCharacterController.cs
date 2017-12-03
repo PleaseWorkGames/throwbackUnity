@@ -11,7 +11,7 @@ public class PlayerCharacterController : MonoBehaviour
     private GameObject player;
 
     private bool walking;
-    private int orientation;
+    private int direction;
 
     public float speed;
 
@@ -28,7 +28,7 @@ public class PlayerCharacterController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
 
         walking = false;
-        orientation = _SOUTH;
+        direction = _SOUTH;
     }
 
     // Update is called once per frame
@@ -39,8 +39,18 @@ public class PlayerCharacterController : MonoBehaviour
         
         walking = Math.Abs(vertical) != 0 || Math.Abs(horizontal) != 0;
         
+        if (vertical > 0) {
+            direction = _NORTH;
+        } else if (vertical < 0) {
+            direction = _SOUTH;
+        } else if (horizontal > 0) {
+            direction = _EAST;
+        } else if (horizontal < 0) {
+            direction = _WEST;
+        }
+        
+        animator.SetInteger("direction", direction);
         animator.SetBool("walking", walking);
-        animator.SetInteger("direction", orientation);
     }
 
     private void FixedUpdate()
@@ -51,20 +61,6 @@ public class PlayerCharacterController : MonoBehaviour
         var transformDirection = transform.TransformDirection(input * speed * Time.deltaTime);
         
         player.GetComponent<CharacterController>().Move(transformDirection);
-        
-        if (!walking) {
-            // TODO - figure out how to stop animation
-        }
-        
-        if (vertical > 0) {
-            orientation = _NORTH;
-        } else if (vertical < 0) {
-            orientation = _SOUTH;
-        } else if (horizontal > 0) {
-            orientation = _EAST;
-        } else if (horizontal < 0) {
-            orientation = _WEST;
-        }
     }
     
     public void OnCollisionEnter(Collision col) 
