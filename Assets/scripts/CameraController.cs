@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    public float cameraOffsetY;
     public GameObject targetDungeon;
 
     // Use this for initialization
@@ -19,6 +20,6 @@ public class CameraController : MonoBehaviour {
     public void updateTarget(GameObject newTarget)
     {
         this.targetDungeon = newTarget;
-        this.transform.SetPositionAndRotation(new Vector3(targetDungeon.transform.position.x,targetDungeon.transform.position.y,this.transform.position.z),this.transform.rotation);
+        this.transform.SetPositionAndRotation(new Vector3(targetDungeon.transform.position.x,targetDungeon.transform.position.y + cameraOffsetY,this.transform.position.z),this.transform.rotation);
     }
 }
