@@ -19,12 +19,18 @@
             </e>
           </e>
         </e>
+        <e p="resources" t="Include">
+          <e p="player" t="Include">
+            <e p="PlayerController.cs" t="Include" />
+          </e>
+        </e>
         <e p="scripts" t="Include">
-          <e p="CharacterController.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="Hud.cs" t="Include" />
           <e p="Inventory.cs" t="Include" />
           <e p="Item.cs" t="Include" />
+          <e p="PlayerCharacterController.cs" t="Include" />
+          <e p="PortalController.cs" t="Include" />
           <e p="TestInventory.cs" t="Include" />
         </e>
       </e>
