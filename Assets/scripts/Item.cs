@@ -39,4 +39,9 @@ public class Item {
 		this.type = type;
 		this.texture = Resources.Load(texture) as Texture2D;
 	}
+	public Item(int id, string name, string type){
+		this.name = name;
+		this.id = id;
+		this.type = type;
+	}
 }

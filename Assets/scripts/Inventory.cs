@@ -10,13 +10,13 @@ public class ItemListing
 	public ItemListing(Item item) 
 	{
 		this.item = item;
-		this.quantity = 1;
+		quantity = 1;
 	}
 }
 
 public class Inventory : MonoBehaviour {
 	
-	private List<ItemListing> itemList;
+	public List<ItemListing> itemList;
 
 	void Start() 
 	{
@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour {
 		itemList = new List<ItemListing> ();
 	}
 
-	void addItem (Item item) 
+	public void add (Item item) 
 	{ 
 		bool found = false;
 		foreach (ItemListing listing in itemList) {
@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	void removeItem(string name) 
+	public void remove(string name) 
 	{
 		foreach (ItemListing listing in itemList) {
 			if (listing.item.name == name) {
@@ -51,4 +51,6 @@ public class Inventory : MonoBehaviour {
 			}
 		}
 	}
+
+	
 }

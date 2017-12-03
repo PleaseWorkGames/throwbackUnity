@@ -7,24 +7,28 @@ public class GameController : MonoBehaviour
 
 	public Hud hud;
 	public Inventory inventory;
-	// Use this for initialization
+
 	void Start () {
-		hud = GameObject.FindWithTag("Hud").GetComponent<Hud>();
+		hud = GameObject.FindGameObjectWithTag("Hud")
+			.gameObject
+			.GetComponent<Hud>();
 		inventory = GetComponent<Inventory>();
 		if (!inventory)
 		{
 			inventory = new Inventory();
 		}
-
 	}
 
-	public void onItemPickup(Item item)
+	public void OnItemPickup(Item item)
 	{
-		
+		inventory.add(item);
+		hud.renderInventory(inventory);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void OnItemDestroyed(string itemName)
+	{
+		inventory.remove(itemName);
+		hud.renderInventory(inventory);
 	}
+		
 }
