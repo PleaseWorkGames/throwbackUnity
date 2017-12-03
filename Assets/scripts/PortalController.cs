@@ -5,11 +5,13 @@ using UnityEngine;
 public class PortalController : MonoBehaviour {
 
     public PortalController target;
+    private CameraController camera;
 
     private bool active;
 
 	// Use this for initialization
 	void Start () {
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
         active = true;
 	}
 	
@@ -18,7 +20,7 @@ public class PortalController : MonoBehaviour {
 		
 	}
 
-    // Teleport the player to the target portal
+    // Teleport the player to the target portal and update the camera
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ( active && 
@@ -26,6 +28,8 @@ public class PortalController : MonoBehaviour {
         {
             target.active = false; // Prevents constant teleportation
             collision.gameObject.GetComponent<Rigidbody2D>().MovePosition(target.transform.position);
+
+            this.camera.updateTarget(target.gameObject.transform.parent.gameObject.transform.parent.gameObject);
         }
     }
 
