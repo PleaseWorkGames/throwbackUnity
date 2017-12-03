@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
 
+    private bool inputInterrupt;
+
     // Direction constants
     private const int _NORTH = 2;
     private const int _SOUTH = 0;
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour {
         rb = this.GetComponent<Rigidbody2D>();
 
         walking = false;
+        inputInterrupt = false;
         orientation = _SOUTH;
     }
 
@@ -41,32 +44,55 @@ public class PlayerController : MonoBehaviour {
 
         if (vertical != 0 || horizontal != 0)
         {
-            walking = true;
+            if (inputInterrupt)
+            {
+                walking = false;
+            }
+            else
+            {
+                walking = true;
+            }
         }
         else
         {
             walking = false;
+            inputInterrupt = false;
         }
 
-        if (vertical > 0)
+        if (!inputInterrupt)
         {
-            orientation = _NORTH;
-        }
-        else if (vertical < 0)
-        {
-            orientation = _SOUTH;
-        }
-        else if (horizontal > 0)
-        {
-            orientation = _EAST;
-        }
-        else if (horizontal < 0)
-        {
-            orientation = _WEST;
-        }
 
-        Vector2 movement = new Vector2(horizontal, vertical);
+            if (vertical > 0)
+            {
+                orientation = _NORTH;
+            }
+            else if (vertical < 0)
+            {
+                orientation = _SOUTH;
+            }
+            else if (horizontal > 0)
+            {
+                orientation = _EAST;
+            }
+            else if (horizontal < 0)
+            {
+                orientation = _WEST;
+            }
 
-        rb.AddForce(movement * speed);
+            Vector2 movement = new Vector2(horizontal, vertical);
+
+            rb.AddForce(movement * speed);
+        }
+    }
+
+    public void interruptInput()
+    {
+        inputInterrupt = true;
+    }
+
+    public void stopMovement()
+    {
+        walking = false;
+        rb.velocity = Vector2.zero;
     }
 }

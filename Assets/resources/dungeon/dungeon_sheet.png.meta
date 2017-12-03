@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: e34a2b9da40560a44a77b95f3b07e086
-timeCreated: 1511122701
+timeCreated: 1511548243
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: dungeon-room
+    21300002: portal
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -114,8 +115,22 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 4, y: 5, z: 5, w: 8}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: portal
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 100
+        width: 24
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 9, y: 0, z: 9, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
