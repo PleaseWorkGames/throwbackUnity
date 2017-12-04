@@ -33,12 +33,6 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        animator.SetBool("walking", walking);
-        animator.SetInteger("direction", orientation);
-    }
-
-    private void FixedUpdate()
-    {
         var vertical = Input.GetAxis("Vertical");
         var horizontal = Input.GetAxis("Horizontal");
 
@@ -46,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         {
             if (inputInterrupt)
             {
-                walking = false;
+                stopMovement();
             }
             else
             {
@@ -55,7 +49,7 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
-            walking = false;
+            stopMovement();
             inputInterrupt = false;
         }
 
@@ -78,9 +72,20 @@ public class PlayerController : MonoBehaviour {
             {
                 orientation = _WEST;
             }
+        }
 
+        animator.SetBool("walking", walking);
+        animator.SetInteger("direction", orientation);
+    }
+
+    private void FixedUpdate()
+    {
+        var vertical = Input.GetAxis("Vertical");
+        var horizontal = Input.GetAxis("Horizontal");
+
+        if (!inputInterrupt)
+        {
             Vector2 movement = new Vector2(horizontal, vertical);
-
             rb.AddForce(movement * speed);
         }
     }
