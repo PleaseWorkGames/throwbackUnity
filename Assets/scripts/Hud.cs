@@ -19,10 +19,6 @@ public class Hud : MonoBehaviour
         List<ItemListing> itemList = inventory.itemList;
         for (int i = 0; i < itemList.Count; i++)
         {
-            if (itemList.ElementAt(i) == null) {
-                continue;
-            }
-            
             ItemListing listing = itemList[i];
             GameObject slot = itemSlots[i];
             Text itemSlotGui = slot.GetComponent<Text>();
