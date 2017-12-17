@@ -26,6 +26,7 @@ public class PortalController : MonoBehaviour {
         if ( active && 
              collision.gameObject.CompareTag("Player"))
         {
+            collision.GetComponent<PlayerController>().stopMovement();
             target.active = false; // Prevents constant teleportation
             collision.gameObject.GetComponent<Rigidbody2D>().MovePosition(target.transform.position);
 

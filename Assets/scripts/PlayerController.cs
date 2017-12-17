@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 
     private bool inputInterrupt;
 
+    public UserInput input;
+
     // Direction constants
     private const int _NORTH = 2;
     private const int _SOUTH = 0;
@@ -33,8 +35,10 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        var vertical = Input.GetAxis("Vertical");
-        var horizontal = Input.GetAxis("Horizontal");
+        Vector2 movementVector = input.GetMovementVector(rb.position);
+
+        var vertical = movementVector.x;
+        var horizontal = movementVector.y;
 
         if (vertical != 0 || horizontal != 0)
         {
@@ -80,8 +84,10 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        var vertical = Input.GetAxis("Vertical");
-        var horizontal = Input.GetAxis("Horizontal");
+        Vector2 movementVector = input.GetMovementVector(rb.position);
+
+        var vertical = movementVector.x;
+        var horizontal = movementVector.y;
 
         if (!inputInterrupt)
         {
@@ -97,7 +103,13 @@ public class PlayerController : MonoBehaviour {
 
     public void stopMovement()
     {
+        input.SetManualMovement(true);
         walking = false;
         rb.velocity = Vector2.zero;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        input.SetManualMovement(true);
     }
 }
