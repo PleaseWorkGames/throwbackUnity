@@ -6,6 +6,7 @@ TagManager:
   tags:
   - itemSlot
   - Hud
+  - Inventory
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,15 +17,18 @@ public class Hud : MonoBehaviour
     {
         clearSlots();
         List<ItemListing> itemList = inventory.itemList;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < itemList.Count; i++)
         {
+            if (itemList.ElementAt(i) == null) {
+                continue;
+            }
+            
             ItemListing listing = itemList[i];
             GameObject slot = itemSlots[i];
             Text itemSlotGui = slot.GetComponent<Text>();
             itemSlotGui.text = listing.item.name;
             itemSlotGui.enabled = true;
         }
-		
     }
 
     private List<GameObject> getSlots(GameObject go)

@@ -20,13 +20,14 @@ public class Inventory : MonoBehaviour {
 
 	void Start() 
 	{
-
 		itemList = new List<ItemListing> ();
 	}
 
-	public void add (Item item) 
+	public void add(Item item) 
 	{ 
 		bool found = false;
+		
+		itemList = new List<ItemListing> ();
 		foreach (ItemListing listing in itemList) {
 			if (listing.item.name == item.name) {
 				found = true;
@@ -34,6 +35,7 @@ public class Inventory : MonoBehaviour {
 				break;
 			}
 		}
+		
 		if (!found) {
 			itemList.Add (new ItemListing (item));
 		}
@@ -51,6 +53,4 @@ public class Inventory : MonoBehaviour {
 			}
 		}
 	}
-
-	
 }

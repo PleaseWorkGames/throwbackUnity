@@ -12,11 +12,8 @@ public class GameController : MonoBehaviour
 		hud = GameObject.FindGameObjectWithTag("Hud")
 			.gameObject
 			.GetComponent<Hud>();
-		inventory = GetComponent<Inventory>();
-		if (!inventory)
-		{
-			inventory = new Inventory();
-		}
+		
+		inventory = GameObject.FindGameObjectWithTag("Inventory").gameObject.GetComponent<Inventory>();
 	}
 
 	public void OnItemPickup(Item item)
@@ -30,5 +27,4 @@ public class GameController : MonoBehaviour
 		inventory.remove(itemName);
 		hud.renderInventory(inventory);
 	}
-		
 }
